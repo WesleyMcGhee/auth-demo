@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Header from "../../components/Header/Header.component";
-import Toastify from "toastify-js";
 import "./Signup.css";
 import "toastify-js/src/toastify.css";
 
@@ -26,9 +25,7 @@ export default function Signup() {
   function submitHandler(e: any) {
     e.preventDefault();
     if (inputs.password !== inputs.confirmPassword) {
-      Toastify({
-        text: "Test",
-      });
+      console.log("Passwords don't match");
     }
     console.log(inputs);
   }
@@ -37,6 +34,7 @@ export default function Signup() {
     <div className="signup-page">
       <Header />
       <form className="form" onSubmit={(e) => submitHandler(e)}>
+        <h1>Sign Up</h1>
         <input
           className="form-el"
           name="username"

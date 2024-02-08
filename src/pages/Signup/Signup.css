@@ -3,6 +3,8 @@
 }
 
 .form {
+  border: 2px solid #242424;
+  border-radius: 10px;
   width: 30vw;
 }
 
