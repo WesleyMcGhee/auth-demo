@@ -1,0 +1,32 @@
+.signup-page {
+  width: 100%;
+}
+
+.form {
+  width: 30vw;
+}
+
+.form-el {
+  width: 80%;
+  height: 3vh;
+  margin: 0.5vh auto;
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 5px;
+  display: block;
+}
+
+.form-btn {
+  background-color: white;
+  border: 2px solid #242424;
+  width: 80%;
+  height: 3vh;
+  margin: 0.5vh auto;
+}
+
+.form-btn:hover {
+  background-color: #242424;
+  color: white;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
