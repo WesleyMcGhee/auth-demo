@@ -1,13 +1,19 @@
+import { useState } from "react";
 import Header from "../../components/Header/Header.component";
 import "./Login.css";
 
+interface ILoginInputs {
+  username: string;
+  password: string;
+}
+
 export default function Login() {
-  const [inputs, setInputs] = useState<ISignUpInputs>({
+  const [inputs, setInputs] = useState<ILoginInputs>({
     username: "",
-    email: "",
     password: "",
-    confirmPassword: "",
   });
+
+  const errors: string[] = [];
 
   function changeHandler(e: any) {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -15,17 +21,15 @@ export default function Login() {
 
   function submitHandler(e: any) {
     e.preventDefault();
-    if (inputs.password !== inputs.confirmPassword) {
-      console.log("Passwords don't match");
-    }
+    // We probably should add some more validations here
     console.log(inputs);
   }
 
   return (
-    <div className="signup-page">
+    <div className="login-page">
       <Header />
       <form className="form" onSubmit={(e) => submitHandler(e)}>
-        <h1>Sign Up</h1>
+        <h1>Login</h1>
         <input
           className="form-el"
           name="username"
