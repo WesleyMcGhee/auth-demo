@@ -12,8 +12,10 @@ export default function Login() {
     username: "",
     password: "",
   });
-
-  const errors: string[] = [];
+  const [validErrors, setValidErrors] = useState<ILoginInputs>({
+    username: "",
+    password: "",
+  });
 
   function changeHandler(e: any) {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -21,7 +23,14 @@ export default function Login() {
 
   function submitHandler(e: any) {
     e.preventDefault();
-    // We probably should add some more validations here
+
+    if (inputs.username.length < 8) {
+      setValidErrors({
+        ...validErrors,
+        username: "You need to have at least 8 charcters in your username",
+      });
+    }
+
     console.log(inputs);
   }
 
@@ -30,6 +39,7 @@ export default function Login() {
       <Header />
       <form className="form" onSubmit={(e) => submitHandler(e)}>
         <h1>Login</h1>
+        {validErrors.username && <p>{validErrors.username}</p>}
         <input
           className="form-el"
           name="username"
@@ -39,23 +49,9 @@ export default function Login() {
         />
         <input
           className="form-el"
-          name="email"
-          type="email"
-          placeholder="Email"
-          onChange={(e) => changeHandler(e)}
-        />
-        <input
-          className="form-el"
           name="password"
           type="password"
           placeholder="Password"
-          onChange={(e) => changeHandler(e)}
-        />
-        <input
-          className="form-el"
-          name="confirmPassword"
-          type="password"
-          placeholder="Confirm Password"
           onChange={(e) => changeHandler(e)}
         />
         <input className="form-btn" type="submit" />
