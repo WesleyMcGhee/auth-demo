@@ -59,7 +59,7 @@ async function updateWaifu(req: Request, res: Response): Promise<Response> {
       "UPDATE waifus SET name = $1, price = $2, description = $3 WHERE id = $4 RETURNING *",
       [name, price, description, id]
     );
-    return res.status(200).send(updateWaifu);
+      return res.status(200).send(updatedWaifu.rows);
   } catch (err) {
     console.error(`Error in updateWaifu at ${new Date()} ERROR: ${err}`);
     return res.status(500).send(err);
