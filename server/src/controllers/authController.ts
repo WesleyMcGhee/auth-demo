@@ -38,25 +38,30 @@ export async function postSignup(
 
 export async function postSignin(
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<Response> {
   try {
     const { username, password } = req.params;
 
-    const user = await pool.query("SELECT * FROM users WHERE username=$1;", [username]);
+    const user = await pool.query("SELECT * FROM users WHERE username=$1;", [
+      username,
+    ]);
 
     if (user.rowCount === 0) {
       return res.status(400).send("User does not exist");
     }
-    
-    const match: boolean = await bcrypt.compare(password, user.rows[0].password_hash);
+
+    const match: boolean = await bcrypt.compare(
+      password,
+      user.rows[0].password_hash
+    );
 
     if (!match) {
       return res.status(400).send("Username or Password incorrect");
     }
 
     return res.status(200).send("Authorized");
-  } catch(err) {
+  } catch (err) {
     console.error(`Error in postSignin at ${new Date()}, ERROR: ${err}`);
     return res.status(500).send("Internal Server Error");
   }
