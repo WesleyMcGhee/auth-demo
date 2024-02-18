@@ -48,7 +48,7 @@ export async function postSignin(
     ]);
 
     if (user.rowCount === 0) {
-      return res.status(400).send("User does not exist");
+      return res.status(404).send("User does not exist");
     }
 
     const match: boolean = await bcrypt.compare(
