@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import bcrypt from "bcrypt";
 import pool from "../database/db";
+import * as jwt from "jsonwebtoken";
 
 // Probably not the actual one will use ENV var for this
 const userSaltRounds: number = 10;
