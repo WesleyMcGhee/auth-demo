@@ -77,16 +77,20 @@ export async function postSignin(
   }
 }
 
-function authenticateToken(req: any, res: Response, next: NextFunction) {
+export function authenticateToken(req: any, res: Response, next: NextFunction) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.sendStatus(401);
   if (!process.env.AUTH_TOKEN_SECRET)
     return res.status(500).send("Internal Server Error");
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET ?? "", (err, user) => {
-    if (err) return res.sendStatus(403);
+  jwt.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET ?? "",
+    (err: any, user: any) => {
+      if (err) return res.sendStatus(403);
 
-    req.user = user;
-    next();
-  });
+      req.user = user;
+      next();
+    }
+  );
 }
